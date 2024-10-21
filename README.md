@@ -1,4 +1,4 @@
-# CogVideo & CogVideoX
+# CogVideo & CogVideoX - https://github.com/THUDM/CogVideo
 
 [中文阅读](./README_zh.md)
 
