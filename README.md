@@ -1,5 +1,60 @@
 # CogVideo & CogVideoX - https://github.com/THUDM/CogVideo
 
+```python
+    # Setup proxy
+    proxies = 'http://RyyRW8:e2Z6KQ@186.65.123.202:8000'
+
+    client = OpenAI(
+        api_key="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",
+        http_client=httpx.Client(
+            proxies=proxies,
+            transport=httpx.HTTPTransport(local_address="0.0.0.0"),
+        ),
+    )
+    # text to video
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": f"{sys_prompt_t2v}"},
+            {
+                "role": "user",
+                "content": 'Create an imaginative video descriptive caption or modify an earlier caption for the user input : " a girl is on the beach"',
+            },
+            {
+                "role": "assistant",
+                "content": "A radiant woman stands on a deserted beach, arms outstretched, wearing a beige trench coat, white blouse, light blue jeans, and chic boots, against a backdrop of soft sky and sea. Moments later, she is seen mid-twirl, arms exuberant, with the lighting suggesting dawn or dusk. Then, she runs along the beach, her attire complemented by an off-white scarf and black ankle boots, the tranquil sea behind her. Finally, she holds a paper airplane, her pose reflecting joy and freedom, with the ocean's gentle waves and the sky's soft pastel hues enhancing the serene ambiance.",
+            },
+        ],
+        model="gpt-4o",  # glm-4-plus and gpt-4o have be tested
+        temperature=0.01,
+        top_p=0.7,
+        stream=False,
+        max_tokens=250,
+    )
+    # image to video
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": f"{sys_prompt_i2v}"},
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": image_to_url(image_path),
+                        },
+                    },
+                ],
+            },
+        ],
+        temperature=0.01,
+        top_p=0.7,
+        stream=False,
+        max_tokens=250,
+    )
+```
+
 [中文阅读](./README_zh.md)
 
 [日本語で読む](./README_ja.md)
