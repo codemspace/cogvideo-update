@@ -2,10 +2,10 @@
 
 ```python
     # Setup proxy
-    proxies = 'http://RyyRW8:e2Z6KQ@186.65.123.202:8000'
+    proxies = 'http://:8000'
 
     client = OpenAI(
-        api_key="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",
+        api_key="",
         http_client=httpx.Client(
             proxies=proxies,
             transport=httpx.HTTPTransport(local_address="0.0.0.0"),
